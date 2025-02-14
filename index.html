@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .poem {
+            margin: 40px 0;
+            line-height: 1.6;
+            font-weight: 300;
+            font-size: 1.2rem;
+        }
+
+        .gif-container {
+            display: flex;
+            justify-content: space-around;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .gif-box {
+            flex: 1;
+            max-width: 300px;
+            border: none;
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            padding: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .gif-box:hover {
+            transform: scale(1.05);
+        }
+
+        .gif-box img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .gif-box-inner {
+            background: black;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-weight: 600;
+            color: #ff69b4;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Add floating hearts animation */
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            color: #cc0052;
+            opacity: 0;
+            animation: float-heart 6s ease-in infinite;
+        }
+
+        @keyframes float-heart {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Add fade-in animation for poem */
+        .poem p {
+            animation: fadeIn 2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Add new styles for the present section */
+        .present-container {
+            margin-top: 40px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .present-box {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .present-box:hover {
+            transform: scale(1.1);
+        }
+
+        .present-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .hidden-poem {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            margin-top: 20px;
+            opacity: 0;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            font-weight: 300;
+            padding: 0 20px;
+            text-align: left;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .hidden-poem.revealed {
+            max-height: 1000px;  /* Increased to accommodate longer poem */
+            opacity: 1;
+            transition: max-height 1s ease-out, opacity 1s ease-in;
+        }
+
+        .present-text {
+            color: #ff69b4;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    <div class="container">
+        <h1>Happy Valentine's Day</h1>
+        
+        <div class="poem">
+            <!-- Replace with your poem -->
+            <p>
+                Roses are red,<br>
+                Violets are blue,<br>
+                This website was made,<br>
+                Especially for you.
+            </p>
+        </div>
+
+        <div class="gif-container">
+            <div class="gif-box">
+                <div class="gif-box-inner">
+                    <img src="https://static1.squarespace.com/static/5730beecc6fc0829127a3cc6/57333ad21ccbd187f91838cb/5ea5c9645aaf842048fce6e6/1587924039702/pepper+giphy.gif?format=1500w" alt="Person 1">
+                </div>
+            </div>
+            <div class="gif-box">
+                <div class="gif-box-inner">
+                    <img src="https://i.pinimg.com/originals/57/ab/08/57ab089d55ee551389d1128e4a51c69a.gif" alt="Person 2">
+                </div>
+            </div>
+        </div>
+
+        <div class="present-container" id="presentContainer">
+            <div class="present-box">
+                <img src="https://cdn-icons-png.flaticon.com/512/4213/4213958.png" alt="Present">
+            </div>
+            <p class="present-text">Click to open your present!</p>
+            <div class="hidden-poem" id="hiddenPoem">
+                <p>
+                    in this breath, you are present<br>
+                    and you<br>
+                    present the best<br>
+                    in me<br>
+                    like a mirror<br>
+                    at the surface of placid waters<br><br>
+
+                    i sink deep<br>
+                    down beneath the superficial<br>
+                    diving to the end<br>
+                    of what we can see<br>
+                    forever searching for...<br>
+                    some thing...<br>
+                    some one...<br>
+                    some time...<br><br>
+
+                    when things were more<br>
+                    or less<br>
+                    than what they are now.<br>
+                    some space...<br>
+                    where it's ok<br>
+                    to be me<br>
+                    to be here.<br><br>
+
+                    when you wrap me in the blanket of your compassion<br>
+                    i feel the harmony of god's whistle.<br>
+                    you bring me closer to heaven, to my humanity<br>
+                    with every moment we spend together.<br>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            document.getElementById('hearts').appendChild(heart);
+            
+            // Remove heart after animation
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        // Create new hearts periodically
+        setInterval(createHeart, 300);
+
+        // Add present click handler
+        const presentContainer = document.getElementById('presentContainer');
+        const hiddenPoem = document.getElementById('hiddenPoem');
+        let isOpened = false;
+
+        presentContainer.addEventListener('click', () => {
+            if (!isOpened) {
+                hiddenPoem.classList.add('revealed');
+                presentContainer.querySelector('.present-text').textContent = 'Your special message ❤️';
+                isOpened = true;
+            }
+        });
+    </script>
+</body>
+</html> 
